@@ -1,15 +1,12 @@
 <?php
 namespace app\admin\controller;
-
-/**
-*   商城后台管理系统
-*/
-class Index extends \think\Controller
+use think\Controller;
+class Index extends Controller
 {
-	
-	public function Index()
-	{
-		return view();
-	}
-	
+    public function index()
+    {
+        return $this->fetch();
+    }
+
+    
 }
