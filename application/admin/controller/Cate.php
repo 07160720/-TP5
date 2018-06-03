@@ -10,10 +10,10 @@ class Cate extends \think\Controller
 	public function catelist()
 	{
 		// 商品列表的方法
-		$cate_select = db('cate')->select();
+		$cate_select = db('cate')->order('cate_sort')->select();
 		$cate_model = model('Cate');
         $cate_list= $cate_model->getChildrenId($cate_select,$pid = 0);
-        //var_dump($cate_list);die;
+       // var_dump($cate_list);die;
 		$this->assign('cate_list',$cate_list);
 		return view();
 	}
@@ -97,6 +97,20 @@ class Cate extends \think\Controller
         }else{
         	$this->error('分类删除失败','cate/catelist');
         }
+	}
+
+
+	public function sort(){
+        // 对分类进行排序的方法
+		$post = request()->post();
+		//dump($post);die();
+		foreach ($post as $key => $value) {
+			 db('cate')->update([
+                  'cate_id'  =>   $key,
+                  'cate_sort' =>  $value,
+			 ]);
+		}
+		$this->redirect('cate/catelist');
 	}
 
 }

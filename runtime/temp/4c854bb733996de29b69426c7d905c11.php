@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp\wamp64\www\jd\public/../application/admin\view\cate\add.html";i:1527902569;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1527901516;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp\wamp64\www\jd\public/../application/admin\view\cate\add.html";i:1527902569;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1527995602;}*/ ?>
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -358,8 +358,7 @@
 
 				<span class="btn btn-danger"></span>
 			</div>
-		</div><!-- #sidebar-shortcuts -->
-
+		</div>
 		<ul class="nav nav-list">
 			<li class="active">
 				<a href="index.html">
@@ -423,7 +422,29 @@
 								</a>
 							</li>
 						</ul>
-					</li> 
+					</li>
+					<li>
+						<a href="#" class="dropdown-toggle">
+							<i class="icon-double-angle-right"></i>
+							商品管理
+							<b class="arrow icon-angle-down"></b>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="<?php echo url('goods/goodslist'); ?>">
+									<i class="icon-double-angle-right"></i>
+									商品列表
+								</a>
+							</li>
+
+							<li>
+								<a href="<?php echo url('goods/add'); ?>">
+									<i class="icon-double-angle-right"></i>
+									添加商品
+								</a>
+							</li>
+						</ul>
+					</li>  
 				</ul>
 			</li>
 					<li>
