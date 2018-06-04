@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:73:"D:\wamp\wamp64\www\jd\public/../application/admin\view\cate\catelist.html";i:1527930395;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"D:\wamp\wamp64\www\jd\public/../application/admin\view\goods\goodslist.html";i:1528123661;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,10 +482,10 @@
 						<div class="page-content">
 							<div class="page-header">
 								<h1>
-									分类管理
+									商品管理
 									<small>
 										<i class="icon-double-angle-right"></i>
-										分类列表
+										商品列表
 									</small>
 								</h1>
 							</div><!-- /.page-header -->
@@ -505,13 +505,18 @@
 																</label>
 															</th>
 															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 245px;">ID</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">分类名称</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">排序</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品名称</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品缩略图</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品价格</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品状态</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品销量</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品库存</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">所属分类</th>
 															<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 201px;">操作</th>
 														</tr>
 													</thead>
 
-													<?php if(is_array($cate_list) || $cate_list instanceof \think\Collection || $cate_list instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+													<?php if(is_array($goods_select) || $goods_select instanceof \think\Collection || $goods_select instanceof \think\Paginator): $i = 0; $__LIST__ = $goods_select;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 													<tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
 														<td class="center  sorting_1">
 															<label>
@@ -521,17 +526,28 @@
 														</td>
 
 														<td class=" ">
-															<a href="#"><?php echo $vo['cate_id']; ?></a>
+															<a href="#"><?php echo $vo['goods_id']; ?></a>
 														</td>
-														<td class=""><?php echo $vo['str']; ?><?php echo $vo['cate_name']; ?></td>
-														<td class=""><input type="text" name="<?php echo $vo['cate_id']; ?>" value="<?php echo $vo['cate_sort']; ?>"></td>
+														<td class=""><?php echo $vo['goods_name']; ?></td>
+														<td class=""><img src="<?php echo $vo['goods_thumb']; ?>" style="width: 100px;"></td>
+														<td class=""><?php echo $vo['goods_price']; ?></td>
+														<td class="">
+															<?php if($vo['goods_status'] == 1): ?>
+                                                            已上架
+															<?php else: ?>
+															未上架
+															<?php endif; ?>
+														</td>
+														<td class=""><?php echo $vo['goods_sales']; ?></td>
+														<td class=""><?php echo $vo['goods_inventory']; ?></td>
+														<td class=""><?php echo $vo['cate_name']; ?></td>
 														<td class="">
 															<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-																<a class="green" href="<?php echo url('cate/upd',array('cate_id'=>$vo['cate_id'])); ?>">
+																<a class="green" href="<?php echo url('goods/upd',array('goods_id'=>$vo['goods_id'])); ?>">
 																	<i class="icon-pencil bigger-130"></i>
 																</a>
 
-																<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('cate/del_cate',array('cate_id'=>$vo['cate_id'])); ?>'">
+																<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('cate/del_cate',array('goods_id'=>$vo['goods_id'])); ?>'">
 																	<i class="icon-trash bigger-130"></i>
 																</a>
 															</div>

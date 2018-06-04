@@ -33,8 +33,18 @@ class Cate extends \think\Model
       return $arr;
     }
 
-
+    public function getFatherId($cate_list,$pid=0){
+      // 由子类id得到父类
+         static $arr = array();
+         foreach ($cate_list as $key => $value) {
+          if ($value['cate_id'] == $pid) {
+               $arr[] = $value; // 递归的方法
+               $this->getFatherId($cate_list,$value['cate_pid']);
+            }
+            
+         }
+         return $arr;
+    }
 
 }
-
 ?>
