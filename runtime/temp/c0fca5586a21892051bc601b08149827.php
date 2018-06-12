@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\wamp\wamp64\www\jd\public/../application/admin\view\goods\add.html";i:1528034640;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\wamp\wamp64\www\jd\public/../application/admin\view\goods\add.html";i:1528192392;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -562,7 +562,6 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 所属分类 </label>
 										<div class="col-xs-4" style="margin: 10px;">
-
 											<ul class="nav nav-list">
 												<?php if(is_array($cate_list1) || $cate_list1 instanceof \think\Collection || $cate_list1 instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
 												<li class="active">

@@ -57,49 +57,6 @@
 								</h1>
 							</div><!-- /.page-header -->
 							<form action="{:url('cate/sort')}" method="post">
-								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 
-                                    所属分类:
-                                {if condition='$cate_find'}
-                                {$cate_find.cate_name}
-                                {else/}
-                                {/if}</label>
-									<div class="col-xs-4" style="margin: 10px;">
-										<ul class="nav nav-list">
-											{volist name="cate_list1" id="vo1"}
-											<li class="active">
-												<a href="#" class="dropdown-toggle">
-													<!-- <i class="icon-desktop"></i> -->
-													<span class="menu-text"> {$vo1.cate_name} </span>
-													<b class="arrow icon-angle-down"></b>
-												</a>
-
-												<ul class="submenu" style="display: none";>
-													{volist name="vo1.children" id="vo2"}
-													<li class="open">
-														<a href="#" class="dropdown-toggle">
-															<i class="icon-double-angle-right"></i>
-															<p style="margin: 0px; height: 30px;">{$vo2.cate_name}</p>
-
-															<b class="arrow icon-angle-down"></b>
-														</a>
-														<ul class="submenu" style="display: none;">
-															<div class="col-xs-4"">
-																<li style="margin: 0px;">{volist name="vo2.children" id="vo3"}</li>
-																<li style="width: 200px;height: 30px;">&nbsp;&nbsp;&nbsp;
-																<a href="{:url('goods/goodslist',array('goods_pid'=>$vo3.cate_id))}">{$vo3.cate_name}</a>
-																	</li>
-																	{/volist}	
-																</div>
-															</ul>
-															{/volist}
-														</li>
-													</ul>
-												</li>
-												{/volist}
-											</ul>
-										</div>
-									</div>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="row">

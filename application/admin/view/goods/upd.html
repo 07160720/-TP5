@@ -92,8 +92,9 @@
 											</div>
 											<span id="thumb_upload" class="btn btn-primary fileinput-button" style="display: none">  
 												<span>上传</span>
-												<input id="goods_thumb" placeholder="" class="" type="file" name="goods_thumb" value="{$goods_find.goods_thumb}">
+												<input id="goods_thumb" placeholder="" class="" type="file" name="goods_thumb">
 											</span>
+											
 											<a id="thumb_cancle" href="javascript:void(0)" class="btn btn-warning" role="button"  style="display:;">删除</a>  
 										</div>
 									</div>                                    
@@ -253,7 +254,9 @@
 		<script type="text/javascript">
 			$(function(){
 				$('#thumb_cancle').click(function(){
+					//alert(111);
 					$.ajax({
+						
 						url:'{:url("admin/goods/canclethumb")}',
 						type:'post',
 						success:function(data){

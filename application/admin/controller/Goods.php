@@ -78,16 +78,25 @@ class Goods extends \think\Controller
 	 	      session('goods_thumb',null);
 	 	}
 	 }
-
-	 public function goodslist(){
-
-	 	$goods_select = db('goods')->join('jd_cate','jd_goods.goods_pid = jd_cate.cate_id')->select();
-	 	foreach ($goods_select as $key => $value) {
-	 		  $goods_select[$key]['goods_price'] = $value['goods_price']/100;
-	 	}
-        //dump($goods_select);die;
-	 	$this->assign('goods_select',$goods_select);
-	 	return view();
+    
+	 public function goodslist($goods_pid = ''){
+        $cate_model = model('Cate');
+        $cate_select = db('cate')->select();
+        $cate_list1 = $cate_model->getChildren($cate_select);
+        // 获取无限极分类+列表
+        $this->assign('cate_list1',$cate_list1);
+	 	
+	 	$cate_find = db('cate')->find($goods_pid);
+        if ($cate_find) {
+             $goods_select = db('goods')->where('goods_pid','eq',$goods_pid)->join('jd_cate','jd_goods.goods_pid = jd_cate.cate_id')->paginate(2);  
+             $this->assign('cate_find',$cate_find);
+        }
+        else{
+        	 $goods_select = db('goods')->join('jd_cate','jd_goods.goods_pid = jd_cate.cate_id')->paginate(2);
+        	 $this->assign('cate_find','');
+        }
+        $this->assign('goods_select',$goods_select);
+        return view();
 
 	 }
 
@@ -100,10 +109,17 @@ class Goods extends \think\Controller
 	 	if (empty($goods_find)) {
 	 		$this->redirect('goods/goodslist');
 	 	}
-	 	session('goods_thumb',$goods_find['goods_thumb']);
+	 	if (session('goods_thumb')) {
+	 		$url_pre = DS.'jd'.DS.'public';
+	 		$url = str_replace($url_pre, '.', session('goods_thumb'));
+	 		if (file_exists($url)){
+	 			unlink($url);
+	 		}
+	 	}
+	 	//session('goods_thumb',$goods_find['goods_thumb']);
 	 	$cate_select = db('cate')->select();
         $cate_model = model('Cate');
-        // 获取无线级分类
+        // 获取无限级分类列表
         $cate_list1 = $cate_model->getChildren($cate_select);
 
         $cate_in = $cate_model->getFatherId($cate_select,$goods_find['goods_pid']);
@@ -119,14 +135,66 @@ class Goods extends \think\Controller
 	 }
 
 	 public function updhanddle(){
+	 	// 修改商品提交界面
 	 	$post = request()->post();
-        // $post['goods_thumb'] = session('goods_thumb');
-        // $post['goods_status'] = isset($post['goods_thumb'])?$post['goods_thumb']:'0';
-        // $post['goods_pid'] = isset($post['goods_pid'])?$post['goods_pid']:null;
-        // $validate = validate('Goods');
-        
-	 	//dump($post);die;
-	 }
+	 	$goods_info = db('goods')->find($post['goods_id']);
+	 	$img_url = $goods_info['goods_thumb'];
+	    if (session('goods_thumb')!=null) {
+			//图片进行过替换的情况
+			$post['goods_thumb'] = session('goods_thumb');
+			$url_pre = DS.'jd'.DS.'public';
+			$url = str_replace($url_pre,'.',$img_url);
+			if (file_exists($url)) {
+				unlink($url);
+			}
+
+		}
+		else{
+			// 如果不存在图片的，那么$img_url图片路径传给$post['goods_thumb']
+			$post['goods_thumb'] = $img_url;
+			
+		}
+        //dump($post);die;
+        $post['goods_status'] = isset($post['goods_status'])?$post['goods_status']:'0';
+        $post['goods_pid'] = isset($post['goods_pid'])?$post['goods_pid']:null;
+        $validate = validate('Goods');
+        if (!$validate->check($post)) {
+        	$this->error($validate->getError(),'goods/goodslist');
+        }
+        $goods_add_result = db('goods')->update($post);
+       
+        if ($goods_add_result) { 	
+             session('goods_thumb',null);
+        	 $this->success('商品修改成功','goods/goodslist');
+        }else{
+        	session('goods_thumb',null);
+        	$this->error('商品修改失败','goods/goodslist');
+        }
+	}
+
+	public function del($goods_id = ''){
+		// 商品信息删除的方法
+        if ($goods_id == '') {
+			 $this->redirect('goods/goodslist');
+		}
+		$goods_find = db('goods')->find($goods_id);
+        if (empty($goods_find)) {
+        	 $this->redirect('goods/goodslist');
+        }	
+		$goods_del_result = db('goods')->delete($goods_id);
+        if ($goods_del_result) {
+        	if ($goods_find['goods_thumb']) {
+        		$url_pre = DS.'jd'.DS.'public';
+        		$url = str_replace($url_pre, '.', $goods_find['goods_thumb']);
+        		if (file_exists($url)){
+        			unlink($url);
+        		}
+        	}
+        	$this->success('商品删除成功','goods/goodslist');
+        }else{
+        	$this->error('商品删除失败','goods/goodslist');
+        }
+	}
 }
 
 ?>

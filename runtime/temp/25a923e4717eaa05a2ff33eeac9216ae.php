@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\wamp\wamp64\www\jd\public/../application/admin\view\goods\upd.html";i:1528183815;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\PhpStudy\PHPTutorial\WWW\jd\public/../application/admin\view\goods\add.html";i:1528192392;s:72:"D:\PhpStudy\PHPTutorial\WWW\jd\application\admin\view\public\navbar.html";i:1527774212;s:74:"D:\PhpStudy\PHPTutorial\WWW\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -495,10 +495,10 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								商品管理
+								分类管理
 								<small>
 									<i class="icon-double-angle-right"></i>
-									修改商品
+									添加分类
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -506,12 +506,11 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form" action="<?php echo url('goods/updhanddle'); ?>" method="post">
-									<input type="hidden" name="goods_id" value="<?php echo $goods_find['goods_id']; ?>">
+								<form class="form-horizontal" role="form" action="<?php echo url('goods/addhanddle'); ?>" method="post">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_name">商品名称</label>
 										<div class="col-sm-9">
-											<input type="text" id="goods_name" name="goods_name" placeholder="请输入商品名称" class="col-xs-10 col-sm-5" style="margin: 10px;" value="<?php echo $goods_find['goods_name']; ?>">
+											<input type="text" id="goods_name" name="goods_name" placeholder="请输入商品名称" class="col-xs-10 col-sm-5" style="margin: 10px;">
 										</div>
 									</div>
 
@@ -519,32 +518,27 @@
 										<label class="col-sm-3 control-label no-padding-right" for="thumb"> 商品缩略图 </label>
 
 										<div class="col-xs-4">
-											<img src="<?php echo $goods_find['goods_thumb']; ?>" id="img" name="img" width="130">
+											<img src="/jd/public/static/admin/assets/images/upload/upload.png" id="img" name="img" width="130">
 											<div class="progress">
 												<div id="thumb_progress" class="progress-bar" style="width:0%;"></div>
 											</div>
-											<span id="thumb_upload" class="btn btn-primary fileinput-button" style="display: none">  
+											<span id="thumb_upload" class="btn btn-primary fileinput-button">  
 												<span>上传</span>
 												<input id="goods_thumb" placeholder="" class="" type="file" name="goods_thumb">
 											</span>
-											
-											<a id="thumb_cancle" href="javascript:void(0)" class="btn btn-warning" role="button"  style="display:;">删除</a>  
+											<a id="thumb_cancle" href="javascript:void(0)" class="btn btn-warning" role="button"  style="display:none">删除</a>  
 										</div>
 									</div>                                    
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_price">商品价格</label>
 										<div class="col-sm-9">
-											<input type="text" id="goods_price" name="goods_price" placeholder="请输入商品价格" class="col-xs-10 col-sm-5" style="margin: 10px;" value="<?php echo $goods_find['goods_price']; ?>">
+											<input type="text" id="goods_price" name="goods_price" placeholder="请输入商品价格" class="col-xs-10 col-sm-5" style="margin: 10px;">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_status">商品状态</label>
-										<input id="goods_status" name="goods_status" type="checkbox" class="ace ace-switch ace-switch-5" style="margin: 20px;" value="<?php echo $goods_find['goods_status']; ?>"
-										 <?php if($goods_find['goods_status'] == 1): ?>
-										 checked="checked"
-										 <?php else: endif; ?> 
-										>
+										<input id="goods_status" name="goods_status" value="1" checked="checked" type="checkbox" class="ace ace-switch ace-switch-5" style="margin: 20px;">
 										<span class="lbl"></span>
 										
 									</div>
@@ -552,14 +546,14 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_sales">商品销量</label>
 										<div class="col-sm-9">
-											<input type="text" id="goods_sales" name="goods_sales" placeholder="请输入商品销量" class="col-xs-10 col-sm-5" style="margin: 10px;" value="<?php echo $goods_find['goods_sales']; ?>">
+											<input type="text" id="goods_sales" name="goods_sales" placeholder="请输入商品销量" class="col-xs-10 col-sm-5" style="margin: 10px;">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_inventory">商品库存</label>
 										<div class="col-sm-9">
-											<input type="text" id="goods_inventory" name="goods_inventory" placeholder="请输入商品库存" class="col-xs-10 col-sm-5" style="margin: 10px;" value="<?php echo $goods_find['goods_inventory']; ?>">
+											<input type="text" id="goods_inventory" name="goods_inventory" placeholder="请输入商品库存" class="col-xs-10 col-sm-5" style="margin: 10px;">
 										</div>
 									</div>
 
@@ -568,7 +562,6 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 所属分类 </label>
 										<div class="col-xs-4" style="margin: 10px;">
-
 											<ul class="nav nav-list">
 												<?php if(is_array($cate_list1) || $cate_list1 instanceof \think\Collection || $cate_list1 instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
 												<li class="active">
@@ -578,12 +571,7 @@
 														<b class="arrow icon-angle-down"></b>
 													</a>
 													
-													<ul class="submenu"
-                                                     <?php if($cate_in['one']['cate_id'] == $vo1['cate_id']): ?>
-													 style="display: block;"
-													 <?php else: ?>
-													 style="display: none;"
-													 <?php endif; ?>>
+													<ul class="submenu" style="display: none";>
 														<?php if(is_array($vo1['children']) || $vo1['children'] instanceof \think\Collection || $vo1['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo1['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?>
 														<li class="open">
 															<a href="#" class="dropdown-toggle">
@@ -592,20 +580,11 @@
 																
 																<b class="arrow icon-angle-down"></b>
 															</a>
-															<ul class="submenu"  
-															<?php if($cate_in['two']['cate_id'] == $vo2['cate_id']): ?>
-															style="display: block;"
-															<?php else: ?>
-															style="display: none;"
-															<?php endif; ?>>
+															<ul class="submenu" style="display: none;">
 																<div class="col-xs-4">
 																	<?php if(is_array($vo2['children']) || $vo2['children'] instanceof \think\Collection || $vo2['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo2['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?>	
 																	<li style="width: 200px;height: 30px;">&nbsp;&nbsp;&nbsp;
-																		<input name="goods_pid" value="<?php echo $vo3['cate_id']; ?>" type="radio"
-																		 <?php if($goods_find['goods_pid'] == $vo3['cate_id']): ?>
-                                                                         checked="true"
-                                                                         <?php endif; ?> 
-																		><?php echo $vo3['cate_name']; ?></li>
+																		<input name="goods_pid" value="<?php echo $vo3['cate_id']; ?>" type="radio"><?php echo $vo3['cate_name']; ?></li>
 																		<?php endforeach; endif; else: echo "" ;endif; ?>	
 																	</div>
 																</ul>
@@ -619,9 +598,9 @@
 										</div>
 										<div class="clearfix form-actions">
 											<div class="col-md-offset-3 col-md-9">
-												<input type="submit" name="" value="修改商品" class="btn btn-info">
+												<input type="submit" name="" value="添加分类" class="btn btn-info">
 												&nbsp; &nbsp; &nbsp;
-												<input type="reset" name="" value="重置商品" class="btn">
+												<input type="reset" name="" value="重置分类" class="btn">
 											</div>
 										</div>
 									</form>
@@ -685,9 +664,7 @@
 		<script type="text/javascript">
 			$(function(){
 				$('#thumb_cancle').click(function(){
-					//alert(111);
 					$.ajax({
-						
 						url:'<?php echo url("admin/goods/canclethumb"); ?>',
 						type:'post',
 						success:function(data){

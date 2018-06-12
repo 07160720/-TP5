@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"D:\wamp\wamp64\www\jd\public/../application/admin\view\goods\goodslist.html";i:1528193434;s:63:"D:\wamp\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:65:"D:\wamp\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp64\www\jd\public/../application/admin\view\cate\catelist.html";i:1527930395;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,52 +482,14 @@
 						<div class="page-content">
 							<div class="page-header">
 								<h1>
-									商品管理
+									分类管理
 									<small>
 										<i class="icon-double-angle-right"></i>
-										商品列表
+										分类列表
 									</small>
 								</h1>
 							</div><!-- /.page-header -->
 							<form action="<?php echo url('cate/sort'); ?>" method="post">
-								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 所属分类 </label>
-									<div class="col-xs-4" style="margin: 10px;">
-										<ul class="nav nav-list">
-											<?php if(is_array($cate_list1) || $cate_list1 instanceof \think\Collection || $cate_list1 instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
-											<li class="active">
-												<a href="#" class="dropdown-toggle">
-													<!-- <i class="icon-desktop"></i> -->
-													<span class="menu-text"> <?php echo $vo1['cate_name']; ?> </span>
-													<b class="arrow icon-angle-down"></b>
-												</a>
-
-												<ul class="submenu" style="display: none";>
-													<?php if(is_array($vo1['children']) || $vo1['children'] instanceof \think\Collection || $vo1['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo1['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?>
-													<li class="open">
-														<a href="#" class="dropdown-toggle">
-															<i class="icon-double-angle-right"></i>
-															<p style="margin: 0px; height: 30px;"><?php echo $vo2['cate_name']; ?></p>
-
-															<b class="arrow icon-angle-down"></b>
-														</a>
-														<ul class="submenu" style="display: none;">
-															<div class="col-xs-4"">
-																<li style="margin: 0px;"><?php if(is_array($vo2['children']) || $vo2['children'] instanceof \think\Collection || $vo2['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo2['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?></li>
-																<li style="width: 200px;height: 30px;">&nbsp;&nbsp;&nbsp;
-																<a href="<?php echo url('goods/goodslist',array('goods_pid'=>$vo3['cate_id'])); ?>"><?php echo $vo3['cate_name']; ?></a>
-																	</li>
-																	<?php endforeach; endif; else: echo "" ;endif; ?>	
-																</div>
-															</ul>
-															<?php endforeach; endif; else: echo "" ;endif; ?>
-														</li>
-													</ul>
-												</li>
-												<?php endforeach; endif; else: echo "" ;endif; ?>
-											</ul>
-										</div>
-									</div>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="row">
@@ -543,18 +505,13 @@
 																</label>
 															</th>
 															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 245px;">ID</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品名称</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品缩略图</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品价格</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品状态</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品销量</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品库存</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">所属分类</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">分类名称</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">排序</th>
 															<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 201px;">操作</th>
 														</tr>
 													</thead>
 
-													<?php if(is_array($goods_select) || $goods_select instanceof \think\Collection || $goods_select instanceof \think\Paginator): $i = 0; $__LIST__ = $goods_select;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+													<?php if(is_array($cate_list) || $cate_list instanceof \think\Collection || $cate_list instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 													<tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
 														<td class="center  sorting_1">
 															<label>
@@ -564,28 +521,17 @@
 														</td>
 
 														<td class=" ">
-															<a href="#"><?php echo $vo['goods_id']; ?></a>
+															<a href="#"><?php echo $vo['cate_id']; ?></a>
 														</td>
-														<td class=""><?php echo $vo['goods_name']; ?></td>
-														<td class=""><img src="<?php echo $vo['goods_thumb']; ?>" style="width: 100px;"></td>
-														<td class=""><?php echo $vo['goods_price']; ?></td>
-														<td class="">
-															<?php if($vo['goods_status'] == 1): ?>
-                                                            已上架
-															<?php else: ?>
-															未上架
-															<?php endif; ?>
-														</td>
-														<td class=""><?php echo $vo['goods_sales']; ?></td>
-														<td class=""><?php echo $vo['goods_inventory']; ?></td>
-														<td class=""><?php echo $vo['cate_name']; ?></td>
+														<td class=""><?php echo $vo['str']; ?><?php echo $vo['cate_name']; ?></td>
+														<td class=""><input type="text" name="<?php echo $vo['cate_id']; ?>" value="<?php echo $vo['cate_sort']; ?>"></td>
 														<td class="">
 															<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-																<a class="green" href="<?php echo url('goods/upd',array('goods_id'=>$vo['goods_id'])); ?>">
+																<a class="green" href="<?php echo url('cate/upd',array('cate_id'=>$vo['cate_id'])); ?>">
 																	<i class="icon-pencil bigger-130"></i>
 																</a>
 
-																<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('goods/del',array('goods_id'=>$vo['goods_id'])); ?>'">
+																<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('cate/del_cate',array('cate_id'=>$vo['cate_id'])); ?>'">
 																	<i class="icon-trash bigger-130"></i>
 																</a>
 															</div>
@@ -628,10 +574,18 @@
 													</tr>
 												</tbody>
 											</table>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23 entries</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="dataTables_paginate paging_bootstrap"><ul class="pagination"><li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li class="next"><a href="#"><i class="icon-double-angle-right"></i></a></li></ul>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-								<?php echo $goods_select->render();; ?>
 							</div>
 
 							<div id="modal-table" class="modal fade" tabindex="-1">
