@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp64\www\jd\public/../application/admin\view\cate\catelist.html";i:1527930395;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp64\www\jd\public/../application/admin\view\cate\catelist.html";i:1529289875;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -420,6 +420,28 @@
 							</li>
 						</ul>
 					</li>  
+					<li>
+						<a href="#" class="dropdown-toggle">
+							<i class="icon-double-angle-right"></i>
+							关键字管理
+							<b class="arrow icon-angle-down"></b>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="<?php echo url('Keywords/keywordslist'); ?>">
+									<i class="icon-double-angle-right"></i>
+									关键字列表
+								</a>
+							</li>
+
+							<li>
+								<a href="<?php echo url('Keywords/add'); ?>">
+									<i class="icon-double-angle-right"></i>
+									添加关键字
+								</a>
+							</li>
+						</ul>
+					</li>  
 				</ul>
 			</li>
 					<li>
@@ -495,7 +517,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="table-responsive">
-													<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid"><div class="row"><div class="col-sm-6"><div id="sample-table-2_length" class="dataTables_length"><label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label></div></div><div class="col-sm-6"><div class="dataTables_filter" id="sample-table-2_filter"><label>Search: <input type="text" aria-controls="sample-table-2"></label></div></div></div><table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+													<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 														<thead>
 															<tr role="row"><th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="
 																" style="width: 91px;">
@@ -574,15 +596,6 @@
 													</tr>
 												</tbody>
 											</table>
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23 entries</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="dataTables_paginate paging_bootstrap"><ul class="pagination"><li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li class="next"><a href="#"><i class="icon-double-angle-right"></i></a></li></ul>
-													</div>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -695,12 +708,15 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-offset-3 col-md-9">
+							<?php echo $show; ?>	
+							<!-- <div class="col-md-offset-3 col-md-9">
 								<input type="submit" name="" value="添加分类" class="btn btn-info">
-							</div>
+							</div> -->
 						</form>			
+						
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>

@@ -6,7 +6,7 @@ namespace app\admin\model;
 */
 class Cate extends \think\Model
 {
-	
+	 protected $resultSetType = 'collection';
    public function getChildrenId($cate_list,$pid = 0,$level = 1){
       //  由父类id得到全部子类
    	  static $arr  = array();
@@ -44,6 +44,11 @@ class Cate extends \think\Model
             
          }
          return $arr;
+    }
+
+    public function goods(){
+      //分类和商品的一对多关系
+      return $this->hasMany('Cate');
     }
 
 }

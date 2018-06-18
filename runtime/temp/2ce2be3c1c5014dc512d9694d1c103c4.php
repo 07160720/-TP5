@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\wamp64\www\jd\public/../application/admin\view\goods\goodslist.html";i:1528786075;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528079778;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\wamp64\www\jd\public/../application/admin\view\goods\goodslist.html";i:1529288880;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8"/>
 	<title>京东商城后台</title>
 	<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
 	<meta name="description" content="JS代码网提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
@@ -290,10 +290,9 @@
 </div>
 	<!--navbar-->
 
-
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
-			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			try{ace.settings.check('main-container','fixed')}catch(e){}
 		</script>
 
 		<div class="main-container-inner">
@@ -420,6 +419,28 @@
 							</li>
 						</ul>
 					</li>  
+					<li>
+						<a href="#" class="dropdown-toggle">
+							<i class="icon-double-angle-right"></i>
+							关键字管理
+							<b class="arrow icon-angle-down"></b>
+						</a>
+						<ul class="submenu">
+							<li>
+								<a href="<?php echo url('Keywords/keywordslist'); ?>">
+									<i class="icon-double-angle-right"></i>
+									关键字列表
+								</a>
+							</li>
+
+							<li>
+								<a href="<?php echo url('Keywords/add'); ?>">
+									<i class="icon-double-angle-right"></i>
+									添加关键字
+								</a>
+							</li>
+						</ul>
+					</li>  
 				</ul>
 			</li>
 					<li>
@@ -536,7 +557,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="table-responsive">
-													<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid"><div class="row"><div class="col-sm-6"><div id="sample-table-2_length" class="dataTables_length"><label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label></div></div><div class="col-sm-6"><div class="dataTables_filter" id="sample-table-2_filter"><label>Search: <input type="text" aria-controls="sample-table-2"></label></div></div></div><table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+													<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 														<thead>
 															<tr role="row"><th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="
 																" style="width: 91px;">
@@ -553,11 +574,12 @@
 															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品销量</th>
 															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">商品库存</th>
 															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">所属分类</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">关键字</th>
 															<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 201px;">操作</th>
 														</tr>
 													</thead>
 
-													<?php if(is_array($goods_select) || $goods_select instanceof \think\Collection || $goods_select instanceof \think\Paginator): $i = 0; $__LIST__ = $goods_select;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+													<?php if(is_array($goods_info) || $goods_info instanceof \think\Collection || $goods_info instanceof \think\Paginator): $i = 0; $__LIST__ = $goods_info;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 													<tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
 														<td class="center  sorting_1">
 															<label>
@@ -582,6 +604,11 @@
 														<td class=""><?php echo $vo['goods_sales']; ?></td>
 														<td class=""><?php echo $vo['goods_inventory']; ?></td>
 														<td class=""><?php echo $vo['cate_name']; ?></td>
+														<td class="">
+															<?php if(is_array($vo['keywords']) || $vo['keywords'] instanceof \think\Collection || $vo['keywords'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['keywords'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
+															<?php echo $vo1['keywords_name']; ?><br/>
+															<?php endforeach; endif; else: echo "" ;endif; ?>
+														</td>
 														<td class="">
 															<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 																<a class="green" href="<?php echo url('goods/upd',array('goods_id'=>$vo['goods_id'])); ?>">
@@ -630,11 +657,12 @@
 														<?php endforeach; endif; else: echo "" ;endif; ?>
 													</tr>
 												</tbody>
+
 											</table>
+										
 										</div>
 									</div>
 								</div>
-								<?php echo $goods_select->render();; ?>
 							</div>
 
 							<div id="modal-table" class="modal fade" tabindex="-1">
@@ -744,11 +772,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-offset-3 col-md-9">
-								<input type="submit" name="" value="添加分类" class="btn btn-info">
-							</div>
-						</form>			
+						</form>	
 					</div>
+					<?php echo $show; ?>		
 				</div>
 			</div>
 		</div>

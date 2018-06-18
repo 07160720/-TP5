@@ -80,25 +80,68 @@ class Goods extends \think\Controller
 	 }
     
 	 public function goodslist($goods_pid = ''){
+        
+        $goods_model = model('Goods');
+        $goods_all = $goods_model->all();
+        $goods_all_toArray = $goods_all->toArray();
+        $goods_info = array();
+        foreach ($goods_all_toArray as $key => $value) {
+            $goods_get = $goods_model->get($value['goods_id']);
+            $goods_keywords = $goods_get->keywords;
+            $goods_keywords_toArray = $goods_keywords->toArray();
+            $value['keywords'] = $goods_keywords_toArray;
+            $goods_cate = $goods_get->cate;
+            $goods_cate_toArray = $goods_cate->toArray();
+            $value['cate_name'] = $goods_cate_toArray['cate_name'];
+            $goods_info[] = $value;
+        }
+
+        //$this->assign('goods_info',$goods_info);
+
         $cate_model = model('Cate');
         $cate_select = db('cate')->select();
         $cate_list1 = $cate_model->getChildren($cate_select);
         // 获取无限极分类+列表
         $this->assign('cate_list1',$cate_list1);
-	 	
 	 	$cate_find = db('cate')->find($goods_pid);
-        if ($cate_find) {
-             $goods_select = db('goods')->where('goods_pid','eq',$goods_pid)->join('jd_cate','jd_goods.goods_pid = jd_cate.cate_id')->paginate(2);  
-             $this->assign('cate_find',$cate_find);
-        }
-        else{
-        	 $goods_select = db('goods')->join('jd_cate','jd_goods.goods_pid = jd_cate.cate_id')->paginate(2);
-        	 $this->assign('cate_find','');
-        }
-        $this->assign('goods_select',$goods_select);
-        return view();
 
-	 }
+      if ($cate_find) {
+         $goods_all = $goods_model->all(function($query) use ($goods_pid)
+         {
+            $query->where('goods_pid','eq',$goods_pid);
+         });
+          $this->assign('cate_find',$cate_find);
+        }else{
+
+          $goods_all = $goods_model->all();
+             $this->assign('cate_find','');
+          
+        }
+          $goods_all_toArray = $goods_all->toArray();
+          $goods_info = array();
+         foreach ($goods_all_toArray as $key => $value) {
+            $goods_get = $goods_model->get($value['goods_id']);
+            $goods_keywords = $goods_get->keywords;
+            $goods_keywords_toArray = $goods_keywords->toArray();
+            $value['keywords'] = $goods_keywords_toArray;
+            $goods_cate = $goods_get->cate;
+            $goods_cate_toArray = $goods_cate->toArray();
+            $value['cate_name'] = $goods_cate_toArray['cate_name'];
+            $goods_info[] = $value;
+          }
+          
+          $this->assign('goods_info',$goods_info);
+          //dump($goods_info);die;
+          $goods_totle = count($goods_info);//得到数据总数         
+          $page_class = new \app\admin\controller\Page($goods_totle,3);
+          $show = $page_class->fpage();//模板显示的内容
+          $limit = $page_class->setlimit();// 获取limit信息 '3,2'
+          $limit = explode(',', $limit);//['3','2']
+          $list = array_slice($goods_info, $limit[0],$limit[1]);//123456
+          $this->assign('show',$show);
+          $this->assign('goods_info',$list);
+          return view();
+        }
 
 	 public function upd($goods_id = ''){
 	 	// 商品修改界面显示
@@ -194,7 +237,6 @@ class Goods extends \think\Controller
         }else{
         	$this->error('商品删除失败','goods/goodslist');
         }
-	}
-}
-
+	 }
+   }
 ?>
