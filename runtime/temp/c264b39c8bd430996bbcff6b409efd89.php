@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"D:\wamp64\www\jd\public/../application/index\view\goods\goodslist.html";i:1529395875;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -7,15 +8,15 @@
 
   <title>搜索页面</title>
 
-  <link href="__INDEX__/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-  <link href="__INDEX__/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+  <link href="/jd/public/static/index/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+  <link href="/jd/public/static/index/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 
-  <link href="__INDEX__/basic/css/demo.css" rel="stylesheet" type="text/css" />
+  <link href="/jd/public/static/index/basic/css/demo.css" rel="stylesheet" type="text/css" />
 
-  <link href="__INDEX__/css/seastyle.css" rel="stylesheet" type="text/css" />
+  <link href="/jd/public/static/index/css/seastyle.css" rel="stylesheet" type="text/css" />
 
-  <script type="text/javascript" src="__INDEX__/basic/js/jquery-1.7.min.js"></script>
-  <script type="text/javascript" src="__INDEX__/js/script.js"></script>
+  <script type="text/javascript" src="/jd/public/static/index/basic/js/jquery-1.7.min.js"></script>
+  <script type="text/javascript" src="/jd/public/static/index/js/script.js"></script>
 </head>
 
 <body>
@@ -48,9 +49,9 @@
 <!--悬浮搜索框-->
 
 <div class="nav white">
-  <div class="logo"><img src="__INDEX__/images/logo.png" /></div>
+  <div class="logo"><img src="/jd/public/static/index/images/logo.png" /></div>
   <div class="logoBig">
-   <li><img src="__INDEX__/images/logobig.png" /></li>
+   <li><img src="/jd/public/static/index/images/logobig.png" /></li>
  </div>
 
  <div class="search-bar pr">
@@ -70,7 +71,7 @@
     <div class="long-title"><span class="all-goods">全部分类</span></div>
     <div class="nav-cont">
      <ul>
-      <li class="index"><a href="{:url('index/index')}">首页</a></li>
+      <li class="index"><a href="<?php echo url('index/index'); ?>">首页</a></li>
       <li class="qc"><a href="#">闪购</a></li>
       <li class="qc"><a href="#">限时抢</a></li>
       <li class="qc"><a href="#">团购</a></li>
@@ -96,47 +97,45 @@
 <div class="search-content">
   <div class="sort">
    <li class="first"><a title="综合">综合排序</a></li>
-   <li class="big"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_sales'))}">销量优先</a></li>
-   <li class="big"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_price_asc'))}">价格最低</a></li>
-   <li class="big"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_price_desc'))}">价格最高</a></li>
-   <li class="big"><a title="评价" href="{:url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_sales'))}">评价为主</a></li>
+   <li class="big"><a title="评价" href="<?php echo url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_sales')); ?>">销量优先</a></li>
+   <li class="big"><a title="评价" href="<?php echo url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_price_asc')); ?>">价格最低</a></li>
+   <li class="big"><a title="评价" href="<?php echo url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_price_desc')); ?>">价格最高</a></li>
+   <li class="big"><a title="评价" href="<?php echo url('goods/goodslist',array('goods_pid'=>$goods_pid,'goods_order'=>'goods_sales')); ?>">评价为主</a></li>
  </div>
  <div class="clear"></div>
 
  <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-  {volist name="goods_select" id="vo"}
+  <?php if(is_array($goods_select) || $goods_select instanceof \think\Collection || $goods_select instanceof \think\Paginator): $i = 0; $__LIST__ = $goods_select;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
   <li>
-    <a href="{:url('goods/introduction',array('goods_id'=>$vo.goods_id))}">
+    <a href="<?php echo url('goods/introduction',array('goods_id'=>$vo['goods_id'])); ?>">
     <div class="i-pic limit">
-     <img src="{$vo.goods_thumb}" />											
+     <img src="<?php echo $vo['goods_thumb']; ?>" />											
      <p class="title fl">
-     {$vo.goods_name}
-     {volist name="vo.keywords" id="vo1"}
-     {$vo1.keywords_name}
-     {/volist}
+     <?php echo $vo['goods_name']; if(is_array($vo['keywords']) || $vo['keywords'] instanceof \think\Collection || $vo['keywords'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['keywords'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
+     <?php echo $vo1['keywords_name']; endforeach; endif; else: echo "" ;endif; ?>
      </p>
      <p class="price fl">
-      {if condition="$vo.goods_after_price"}
-        <em>¥</em><b class="sys_item_price">{$vo.goods_after_price}</b>   
+      <?php if($vo['goods_after_price']): ?>
+        <em>¥</em><b class="sys_item_price"><?php echo $vo['goods_after_price']; ?></b>   
         &nbsp;                              
-        <em>¥</em><del><b class="sys_item_mktprice">{$vo.goods_price}</b></del>            
-      {else/}
-        <em>¥</em><b class="sys_item_price">{$vo.goods_price}</b>                                 
-      {/if}
+        <em>¥</em><del><b class="sys_item_mktprice"><?php echo $vo['goods_price']; ?></b></del>            
+      <?php else: ?>
+        <em>¥</em><b class="sys_item_price"><?php echo $vo['goods_price']; ?></b>                                 
+      <?php endif; ?>
     </p>
     <p class="number fl">
-      销量<span>{$vo.goods_sales}</span>
+      销量<span><?php echo $vo['goods_sales']; ?></span>
     </p>
   </div>
   </a>
 </li>
-{/volist}
+<?php endforeach; endif; else: echo "" ;endif; ?>
 </ul>
 </div>
 <div class="clear"></div>
 <!--分页 -->
  <div class="am-pagination am-pagination-right">
-   {$show}
+   <?php echo $show; ?>
  </div>
   
 
@@ -172,7 +171,7 @@
  <li><a href="home2.html"><i class="am-icon-home "></i>首页</a></li>
  <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
  <li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
- <li><a href="__INDEX__/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+ <li><a href="/jd/public/static/index/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 </div>
 
 <!--菜单 -->
@@ -185,7 +184,7 @@
    </a>
    <div class="ibar_login_box status_login">
      <div class="avatar_box">
-      <p class="avatar_imgbox"><img src="__INDEX__/images/no-img_mid_.jpg" /></p>
+      <p class="avatar_imgbox"><img src="/jd/public/static/index/images/no-img_mid_.jpg" /></p>
       <ul class="user_info">
        <li>用户名：sl1903</li>
        <li>级&nbsp;别：普通会员</li>
@@ -230,7 +229,7 @@
 
 <div id="brand" class="item">
   <a href="#">
-   <span class="wdsc"><img src="__INDEX__/images/wdsc.png" /></span>
+   <span class="wdsc"><img src="/jd/public/static/index/images/wdsc.png" /></span>
  </a>
  <div class="mp_tooltip">
    我的收藏
@@ -240,7 +239,7 @@
 
 <div id="broadcast" class="item">
   <a href="#">
-   <span class="chongzhi"><img src="__INDEX__/images/chongzhi.png" /></span>
+   <span class="chongzhi"><img src="/jd/public/static/index/images/chongzhi.png" /></span>
  </a>
  <div class="mp_tooltip">
    我要充值
@@ -256,7 +255,7 @@
  <!--二维码 -->
  <li class="qtitem">
    <a href="#none"><span class="mpbtn_qrcode"></span></a>
-   <div class="mp_qrcode" style="display:none;"><img src="__INDEX__/images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
+   <div class="mp_qrcode" style="display:none;"><img src="/jd/public/static/index/images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
  </li>
  <li class="qtitem">
    <a href="#top" class="return_top"><span class="top"></span></a>
@@ -337,7 +336,7 @@
 <script>
  window.jQuery || document.write('<script src="basic/js/jquery-1.9.min.js"><\/script>');
 </script>
-<script type="text/javascript" src="__INDEX__/basic/js/quick_links.js"></script>
+<script type="text/javascript" src="/jd/public/static/index/basic/js/quick_links.js"></script>
 
 <div class="theme-popover-mask"></div>
 

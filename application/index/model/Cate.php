@@ -6,7 +6,7 @@ namespace app\index\model;
 class Cate extends \think\Model
 {
 	
-	 public function getChildren($cate_list,$pid = 0){
+	 public function getChildren($cate_list,$pid=0){
 	 	// 得到全部子级，多维数组
 	 	$arr = array();
 	 	foreach ($cate_list as $key => $value) {
@@ -15,6 +15,7 @@ class Cate extends \think\Model
 	 			$arr[] = $value;
 	 		}
 	 	}
+	 	//$arr = array_unshift($arr);
 	 	return $arr;
 	 }
 

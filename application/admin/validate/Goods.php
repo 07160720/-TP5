@@ -8,6 +8,7 @@ class Goods extends Validate
 		'goods_name' => 'require|max:90',
 		'goods_thumb' =>  'require',
 		'goods_price' =>  'require|egt:1|float',
+		'goods_after_price' =>  'require|egt:0|float',
 		'goods_sales' =>  'require|egt:0|float',
 		'goods_inventory' => 'require|egt:0|float',
 	];

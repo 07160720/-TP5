@@ -1,8 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\wamp64\www\jd\public/../application/admin\view\goods\goodslist.html";i:1529322325;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:76:"D:\wamp64\www\jd\public/../application/admin\view\keywords\keywordslist.html";i:1528951292;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8"/>
+	<meta charset="utf-8" />
 	<title>京东商城后台</title>
 	<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
 	<meta name="description" content="JS代码网提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
@@ -290,9 +290,10 @@
 </div>
 	<!--navbar-->
 
+
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
-			try{ace.settings.check('main-container','fixed')}catch(e){}
+			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 		</script>
 
 		<div class="main-container-inner">
@@ -503,122 +504,54 @@
 						<div class="page-content">
 							<div class="page-header">
 								<h1>
-									商品管理
+									关键字管理
 									<small>
 										<i class="icon-double-angle-right"></i>
-										商品列表
+										关键字列表
 									</small>
 								</h1>
 							</div><!-- /.page-header -->
-							<!-- <form action="<?php echo url('cate/sort'); ?>" method="post"> -->
-								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 
-                                    所属分类:
-                                <?php if($cate_find): ?>
-                                <?php echo $cate_find['cate_name']; else: endif; ?></label>
-									<div class="col-xs-4" style="margin: 10px;">
-										<ul class="nav nav-list">
-											<?php if(is_array($cate_list1) || $cate_list1 instanceof \think\Collection || $cate_list1 instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
-											<li class="active">
-												<a href="#" class="dropdown-toggle">
-													<!-- <i class="icon-desktop"></i> -->
-													<span class="menu-text"> <?php echo $vo1['cate_name']; ?> </span>
-													<b class="arrow icon-angle-down"></b>
-												</a>
-
-												<ul class="submenu" style="display: none";>
-													<?php if(is_array($vo1['children']) || $vo1['children'] instanceof \think\Collection || $vo1['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo1['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?>
-													<li class="open">
-														<a href="#" class="dropdown-toggle">
-															<i class="icon-double-angle-right"></i>
-															<p style="margin: 0px; height: 30px;"><?php echo $vo2['cate_name']; ?></p>
-
-															<b class="arrow icon-angle-down"></b>
-														</a>
-														<ul class="submenu" style="display: none;">
-															<div class="col-xs-4"">
-																<li style="margin: 0px;"><?php if(is_array($vo2['children']) || $vo2['children'] instanceof \think\Collection || $vo2['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo2['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?></li>
-																<li style="width: 200px;height: 30px;">&nbsp;&nbsp;&nbsp;
-																<a href="<?php echo url('goods/goodslist',array('goods_pid'=>$vo3['cate_id'])); ?>"><?php echo $vo3['cate_name']; ?></a>
-																	</li>
-																	<?php endforeach; endif; else: echo "" ;endif; ?>	
-																</div>
-															</ul>
-															<?php endforeach; endif; else: echo "" ;endif; ?>
-														</li>
-													</ul>
-												</li>
-												<?php endforeach; endif; else: echo "" ;endif; ?>
-											</ul>
-										</div>
-									</div>
+							<form action="<?php echo url('cate/sort'); ?>" method="post">
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="table-responsive">
-													<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+													<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid"><div class="row"><div class="col-sm-6"><div id="sample-table-2_length" class="dataTables_length"><label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label></div></div><div class="col-sm-6"><div class="dataTables_filter" id="sample-table-2_filter"><label>Search: <input type="text" aria-controls="sample-table-2"></label></div></div></div><table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 														<thead>
-															<tr role="row">
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 100px;">ID</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 118px;">商品名称</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 118px;">商品缩略图</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 118px;">商品价格</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 118px;">促销价格</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 118px;">商品状态</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 100px;">商品销量</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 100px;">商品库存</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 100px;">所属分类</th>
-															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 100px;">关键字</th>
-															<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 118px;">操作</th>
-
+															<tr role="row"><th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="
+																" style="width: 91px;">
+																<label>
+																	<input type="checkbox" class="ace">
+																	<span class="lbl"></span>
+																</label>
+															</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" style="width: 245px;">ID</th>
+															<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 186px;">关键字名称</th>
+															<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending" style="width: 201px;">操作</th>
 														</tr>
 													</thead>
 
-													<?php if(is_array($goods_info) || $goods_info instanceof \think\Collection || $goods_info instanceof \think\Paginator): $i = 0; $__LIST__ = $goods_info;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+													<?php if(is_array($keywords_select) || $keywords_select instanceof \think\Collection || $keywords_select instanceof \think\Paginator): $i = 0; $__LIST__ = $keywords_select;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 													<tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
-												
+														<td class="center  sorting_1">
+															<label>
+																<input type="checkbox" class="ace">
+																<span class="lbl"></span>
+															</label>
+														</td>
+
 														<td class=" ">
-															<a href="#"><?php echo $vo['goods_id']; ?></a>
+															<a href="#"><?php echo $vo['keywords_id']; ?></a>
 														</td>
-														<td class=""><?php echo $vo['goods_name']; ?></td>
-														<td class=""><img src="<?php echo $vo['goods_thumb']; ?>" style="width: 100px;"></td>
-														<td class=""><?php echo $vo['goods_price']; ?></td>
-														<td class="">
-                                                        <?php if($vo['goods_after_price']): ?>
-                                                        <?php echo $vo['goods_after_price']; else: ?>
-														 没有促销价格
-                                                        <?php endif; ?>
-														</td>
-														<td class="">
-															<?php if($vo['goods_status'] == 1): ?>
-                                                            已上架
-															<?php else: ?>
-															未上架
-															<?php endif; ?>
-														</td>
-														<td class=""><?php echo $vo['goods_sales']; ?></td>
-														<td class=""><?php echo $vo['goods_inventory']; ?></td>
-														<td class=""><?php echo $vo['cate_name']; ?></td>
-														<td class="">
-															<?php if(is_array($vo['keywords']) || $vo['keywords'] instanceof \think\Collection || $vo['keywords'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['keywords'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
-															<?php echo $vo1['keywords_name']; ?>
-															<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('goods/keywordsdelhaddle',array('goods_id'=>$vo['goods_id'],'keywords_name'=>$vo1['keywords_name'])); ?>'">
-																<i class="icon-trash bigger-130"></i>
-															</a><br/>
-															<?php endforeach; endif; else: echo "" ;endif; ?>
-															<form action="<?php echo url('goods/keywordsaddhanddle'); ?>" method="post">
-															   <input type="text" name="<?php echo $vo['goods_id']; ?>" placeholder="请输入关键字" autocomplete="off" style="width:130px;">
-															   <input type="submit" name="keywords" value="添加关键字" class="btn btn-info btn-xs">
-                                                            </form>
-														</td>
+														<td class=""><?php echo $vo['keywords_name']; ?></td>
 														<td class="">
 															<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-																<a class="green" href="<?php echo url('goods/upd',array('goods_id'=>$vo['goods_id'])); ?>">
+																<a class="green" href="<?php echo url('keywords/upd',array('keywords_id'=>$vo['keywords_id'])); ?>">
 																	<i class="icon-pencil bigger-130"></i>
 																</a>
 
-																<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('goods/del',array('goods_id'=>$vo['goods_id'])); ?>'">
+																<a class="red" href="javascript:if(confirm('确定删除吗?')) location='<?php echo url('keywords/del_keywords',array('keywords_id'=>$vo['keywords_id'])); ?>'">
 																	<i class="icon-trash bigger-130"></i>
 																</a>
 															</div>
@@ -660,9 +593,7 @@
 														<?php endforeach; endif; else: echo "" ;endif; ?>
 													</tr>
 												</tbody>
-
 											</table>
-										
 										</div>
 									</div>
 								</div>
@@ -775,9 +706,9 @@
 									</div>
 								</div>
 							</div>
-						<!-- </form>	 -->
+						</form>		
+						<?php echo $keywords_select->render();; ?>	
 					</div>
-					<?php echo $show; ?>		
 				</div>
 			</div>
 		</div>
@@ -851,45 +782,14 @@
 </script>
 <script src="/jd/public/static/admin/assets/js/bootstrap.min.js"></script>
 <script src="/jd/public/static/admin/assets/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+
 <script src="/jd/public/static/admin/assets/js/ace-elements.min.js"></script>
 <script src="/jd/public/static/admin/assets/js/ace.min.js"></script>
-<script type="text/javascript">
-	 $(function(){
-           var input = $("input");
-           $.each(input,function(i,v){
-           var $html = $("<ul class='autocomplete'></ul>").hide().insertAfter(v);
-	      //定义一个html标签
-	 $(v).keyup(function(){
-		          var val = $(v).val();
-		          $.ajax({
-        	           url:'<?php echo url("goods/keywordsajax"); ?>',//后台地址
-        	           type:"post",
-                    	data:{'val':val},//参数 把文本框的值传到后台
-                    	dataType:'json',
-        	            success: function(data){
-        		      if(data.length){
-        			      $html.empty();
-        			      $.each(data,function(index,tem){
-        				  var text=$(v).val();
-        				  $("<li></li>").text(tem.keywords_name).appendTo($html)
-        				  .mouseover(function(){
-        					 $(this).css("background","green");
-        				  })
-        				  .mouseout(function(){
-        					 $(this).css("background","yellow");
-        				  })
-        				  .click(function(){
-        					 $(v).val(tem.keywords_name);
-        					 $html.hide();
-        				  });
-        			   })
-        			  $html.show();
-        		    }
-        	      }
-                })
-		      });    
-           });
-	     });
-</script>
+
+<!-- inline scripts related to this page -->
 </body>
 </html>

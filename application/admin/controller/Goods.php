@@ -48,10 +48,19 @@ class Goods extends \think\Controller
             $post['goods_status'] = isset($post['goods_status'])?$post['goods_status']:'0';
             
             $post['goods_pid'] = isset($post['goods_pid'])?$post['goods_pid']:null;
+            $post['goods_after_price'] = empty( $post['goods_after_price'])?'0': $post['goods_after_price'];
 
+
+         
+            if ( $post['goods_after_price'] != 0) {
+                if ($post['goods_after_price']>=$post['goods_price']) {
+                   $this->error('促销价格不能大于商品价格');
+                }
+            }
+            //die;
             $validate = validate('Goods');
-            $result = $validate->check($post);
-            if(!$result){
+            //$result = $validate->check($post);
+            if(!$validate->check($post)){
             	//dump($validate->getError());
             	$this->error($validate->getError(),'goods/add');
             }
@@ -96,8 +105,6 @@ class Goods extends \think\Controller
             $goods_info[] = $value;
         }
 
-        //$this->assign('goods_info',$goods_info);
-
         $cate_model = model('Cate');
         $cate_select = db('cate')->select();
         $cate_list1 = $cate_model->getChildren($cate_select);
@@ -105,18 +112,18 @@ class Goods extends \think\Controller
         $this->assign('cate_list1',$cate_list1);
 	 	$cate_find = db('cate')->find($goods_pid);
 
-      if ($cate_find) {
-         $goods_all = $goods_model->all(function($query) use ($goods_pid)
+        if ($cate_find) {
+          $goods_all = $goods_model->all(function($query) use ($goods_pid)
          {
-            $query->where('goods_pid','eq',$goods_pid);
+          $query->where('goods_pid','eq',$goods_pid);
          });
           $this->assign('cate_find',$cate_find);
-        }else{
+         }else{
 
           $goods_all = $goods_model->all();
-             $this->assign('cate_find','');
-          
-        }
+          $this->assign('cate_find','');
+
+         }
           $goods_all_toArray = $goods_all->toArray();
           $goods_info = array();
          foreach ($goods_all_toArray as $key => $value) {
@@ -150,8 +157,9 @@ class Goods extends \think\Controller
 	 	}
 	 	$goods_find = db('goods')->find($goods_id);
 	 	if (empty($goods_find)) {
-	 		$this->redirect('goods/goodslist');
+	 		   $this->redirect('goods/goodslist');
 	 	}
+
 	 	if (session('goods_thumb')) {
 	 		$url_pre = DS.'jd'.DS.'public';
 	 		$url = str_replace($url_pre, '.', session('goods_thumb'));
@@ -181,6 +189,12 @@ class Goods extends \think\Controller
 	 	// 修改商品提交界面
 	 	$post = request()->post();
 	 	$goods_info = db('goods')->find($post['goods_id']);
+    $post['goods_after_price'] = empty(['goods_after_price'])?'0':$post['goods_after_price'];
+    if ( $post['goods_after_price'] != 0) {
+       if ($post['goods_after_price']>=$post['goods_price']) {
+         $this->error('促销价格不能大于商品价格');
+       }
+    }
 	 	$img_url = $goods_info['goods_thumb'];
 	    if (session('goods_thumb')!=null) {
 			//图片进行过替换的情况
@@ -233,10 +247,76 @@ class Goods extends \think\Controller
         			unlink($url);
         		}
         	}
+
+            $goods_keywords_del_result = db('goods_keywords')->where('goods_id','eq',$goods_id)->delete();
+           
         	$this->success('商品删除成功','goods/goodslist');
         }else{
         	$this->error('商品删除失败','goods/goodslist');
         }
 	 }
+
+    public function keywordsajax(){
+      if (request()->isAjax()) {
+         $post = request()->post();
+         $post_val = $post['val'];
+         $keywords_like = db('keywords')->where('keywords_name','like','%'.$post_val.'%')->limit(3)->select();
+         return $keywords_like;
+       }
+     }
+
+     public function keywordsaddhanddle(){
+         // 添加关键字的提交方法
+         $post = request()->post();
+         //dump($post);die;
+         $goods_id = array_keys($post)[0];
+         $keywords_name = array_values($post)[0];
+         //dump($keywords_name);die;
+         if (empty($keywords_name)){
+             $this->error('关键字不能为空','goods/goodslist');
+         }
+         $keywords_find = db('keywords')->where('keywords_name','eq',$keywords_name)->find();
+         if (empty($keywords_find)) {
+             $this->error('关键字不存在,请添加','keywords/add');
+         }
+
+         $keywords_id = $keywords_find['keywords_id'];
+         $goods_keywords_find = db('goods_keywords')->where('goods_id','eq',$goods_id)->where('keywords_id','eq',$keywords_id)->find();
+         if (!empty($goods_keywords_find)) {
+          $this->redirect('goods/goodslist');
+        }
+         $goods_model = model('goods');
+         $goods = $goods_model->get($goods_id);
+         // 增加关联的中间表数据
+         $goods->keywords()->attach($keywords_id);
+          $this->redirect('goods/goodslist','添加关键字成功');
+        } 
+
+        public function keywordsdelhaddle($goods_id = '',$keywords_name = ''){
+              if (empty($goods_id)|empty($keywords_name)) {
+                 $this->redirect('goods/goodslist');
+              }
+              $goods_find = db('goods')->where('goods_id','eq',$goods_id)->find();
+              if (empty($goods_find)) {
+                 $this->redirect('goods/goodslist');
+              }
+              $keywords_find = db('keywords')->where('keywords_name','eq',$keywords_name)->find();
+              if (empty($keywords_find)) {
+                 $this->redirect('goods/goodslist');
+              }
+
+              $keywords_id = $keywords_find['keywords_id'];
+              $goods_keywords_find = db('goods_keywords')->where('goods_id','eq',$goods_id)->where('keywords_id','eq',$keywords_id)->find();
+              if (empty($goods_keywords_find)) {
+                  $this->redirect('goods/goodslist');
+              }
+              // 增加关联的中间表数据
+              $goods_model = model('goods');
+              $goods = $goods_model->get($goods_id);
+              // 删除中间表数据
+              $goods->keywords()->detach($keywords_id);
+              $this->redirect('goods/goodslist');
+
+        }
    }
 ?>

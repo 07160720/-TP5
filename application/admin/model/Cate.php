@@ -20,9 +20,9 @@ class Cate extends \think\Model
    	  }
    	  return $arr;
    }
-
+    
     public function getChildren($cate_list,$pid = 0){
-      // 得到全部子级，多维数组
+      // 
       $arr = array();
       foreach ($cate_list as $key => $value) {
          if ($value['cate_pid'] == $pid) {
@@ -33,16 +33,31 @@ class Cate extends \think\Model
       return $arr;
     }
 
-    public function getFatherId($cate_list,$pid=0){
-      // 由子类id得到父类
+    public function getFather($cate_list,$pid){
+      // 由子类id得到全部父类
+     static $arr = array();
+     foreach ($cate_list as $key => $value) {
+      if ($value['cate_id'] == $pid) {
+               $value['father'] = $this->getFather($cate_list,$value['cate_pid']);
+               $arr = $value;
+             }
+           
+           }
+           return $arr;
+         }
+
+    public function getFatherId($cate_list,$pid){
+      // 由父类id得到全部子类
          static $arr = array();
          foreach ($cate_list as $key => $value) {
           if ($value['cate_id'] == $pid) {
-               $arr[] = $value; // 递归的方法
+               array_unshift($arr,$value);
+               //$arr[] = $value; // 递归的方法
                $this->getFatherId($cate_list,$value['cate_pid']);
             }
             
          }
+         
          return $arr;
     }
 

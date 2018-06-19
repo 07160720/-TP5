@@ -8,5 +8,8 @@ class Index extends Controller
         return $this->fetch();
     }
 
-    
+    public function index1(){
+    	return view();
+    }
+
 }
