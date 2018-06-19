@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"D:\wamp64\www\jd\public/../application/index\view\goods\introduction.html";i:1529385990;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"D:\wamp64\www\jd\public/../application/index\view\goods\introduction.html";i:1529386003;}*/ ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -93,7 +93,7 @@
 					<li><a href="<?php echo url('index/index'); ?>">首页</a></li>
 					<?php if(is_array($cate_in) || $cate_in instanceof \think\Collection || $cate_in instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_in;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($i == 3): ?>
 					<li class="am-active">
-						<a href="<?php echo url('goods/goodslist',array('goods_id'=>$vo['cate_id'])); ?>"><?php echo $vo['cate_name']; ?></a>
+						<a href="<?php echo url('goods/goodslist',array('goods_pid'=>$vo['cate_id'])); ?>"><?php echo $vo['cate_name']; ?></a>
 					</li>
 					<?php else: ?>
 					<li class="am-active">

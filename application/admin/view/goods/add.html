@@ -130,6 +130,22 @@
 										</div>
 									</div>
 
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="goods_img"> 商品细节图 </label>
+										<div class="form-group">
+											<div class="col-xs-4">
+												<div class="progress">
+													<div id="img_progress" class="progress-bar" style="width:0%;"></div>
+												</div>
+												<span id="img_upload" class="btn btn-primary fileinput-button">  
+													<span>上传</span>
+													<input id="goods_img" placeholder="" class="" type="file" name="goods_img" multiple=""> <!-- multiple="" 这个属性是做到多图上传-->
+												</span> 
+												<div class="preview" style="margin-top:20px;"></div>
+											</div>
+										</div>
+									</div>   
+
 									<div class="space-4"></div>
 
 									<div class="form-group">
@@ -183,10 +199,48 @@
 					</div>
 				</div>
 			</div>
-		
 		<script src='__ADMIN__/assets/js/jquery-2.0.3.min.js'>
 		</script>
-
+        <!-- 商品细节图 -->
+		<script type="text/javascript">
+			$(function(){
+				$('#goods_img').fileupload({
+					url:'{:url("admin/goods/imgupload")}',
+					dataType: "json",   
+					multipart:true,
+					sequentialUploads: true,
+					done:function(e,data){
+						$(".preview").append("<div style='margin-top:10px;'><img src="+data.result+" width='100'>");
+						$(".preview").append("<a class='img_cancle btn btn-warning' role='button' style=''>删除</a></div>");
+					},
+					progressall:function(e,data){
+						var progress = parseInt(data.loaded / data.total * 100, 10);  
+						$("#img_progress").css("width", progress + "%");  
+						$("#img_progress").html("上传总进度："+progress+"%"); 
+					}
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$(".preview").on("click",".img_cancle",function(){
+					var index = $(".preview a").index(this);
+					var me = this;
+					$.ajax({
+						data:{'index':index},
+						type:"post",
+						url:"{:url('admin/goods/imgcancle')}",
+						success:function(data){
+							$(me).prev('div').css({display:"none"});
+							$(me).css({display:"none"});
+							$("#img_progress").css('width',0);
+							$("#img_progress").html('');
+						}
+					})
+				})
+			})
+		</script>
+        <!-- /商品细节图 -->
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='__ADMIN__/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 		</script>

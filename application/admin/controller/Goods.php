@@ -4,10 +4,28 @@ use think\Validate;
 /**
 * 
 */
+if (!isset($_SESSION['imgupload'])){
+   session_start();
+}
+
 class Goods extends \think\Controller
 {
 	 public function add(){
-	    // 添加商品的界面
+	      // 添加商品的界面
+        if (cookie('imgupload')) {
+           // 反序列法
+           $cookie_arr = unserialize(cookie('imgupload'));
+           // 利用foreach删除
+           foreach ($cookie_arr as $key => $value) {
+             $url_pre = DS.'jd'.DS.'public';
+             $url = str_replace($url_pre,'.',$value);
+             if (file_exists($url)) {
+                 unlink($url);
+             }
+           }
+        }
+        cookie('img',null);
+        unset($_SESSION['imgupload']);
         if (session('goods_thumb')) {
         	$url_pre = DS.'jd'.DS.'public';
         	$url = str_replace($url_pre,'.', session('goods_thumb'));
@@ -110,7 +128,7 @@ class Goods extends \think\Controller
         $cate_list1 = $cate_model->getChildren($cate_select);
         // 获取无限极分类+列表
         $this->assign('cate_list1',$cate_list1);
-	 	$cate_find = db('cate')->find($goods_pid);
+	 	    $cate_find = db('cate')->find($goods_pid);
 
         if ($cate_find) {
           $goods_all = $goods_model->all(function($query) use ($goods_pid)
@@ -318,5 +336,36 @@ class Goods extends \think\Controller
               $this->redirect('goods/goodslist');
 
         }
-   }
+
+        public function imgupload(){
+          // 商品细节图上传的方法
+          $file = request()->file('goods_img');
+          $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads' .DS.'img');
+          if ($info) {
+            $rand = rand(1,100);
+            $address = DS . 'jd' . DS .'public' . DS . 'uploads' . DS . 'img' .DS. $info->getSaveName();
+            // 存储session
+            $_SESSION['imgupload'][] = $address;
+            $session_str = serialize($_SESSION['imgupload']);
+            // 存储cookie 3600
+            cookie('imgupload',$session_str,3600);
+            return $address;
+          }else{
+           echo $file->getError();
+        }
+      }
+
+      public function imgcancle(){
+        if (request()->isAjax()) {
+           $post = request()->post();
+           $img_index = $post['index'];
+           $img_address = $_SESSION['imgupload'][$img_index];
+           $url_pre = DS.'jd'.DS.'public';
+           $url = str_replace($url_pre, '.',$img_address);
+           if (file_exists($url)) {
+              unlink($url);
+          }
+       }
+     }
+  }
 ?>
