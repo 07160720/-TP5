@@ -15,8 +15,9 @@ class Goods extends Controller
 	 	return view();
 	 }
     
-     public function goodslist($goods_pid = '',$goods_order = ''){
+     public function goodslist($goods_pid = '',$goods_order = 'id'){
      	if ($goods_pid == '') {
+        
      		$this->redirect('index/index');
      	}
      	$goods_exist = db('goods')->where('goods_pid','eq',$goods_pid)->where("goods_status","eq",'1')->select();

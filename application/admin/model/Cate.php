@@ -51,6 +51,7 @@ class Cate extends \think\Model
          static $arr = array();
          foreach ($cate_list as $key => $value) {
           if ($value['cate_id'] == $pid) {
+            
                array_unshift($arr,$value);
                //$arr[] = $value; // 递归的方法
                $this->getFatherId($cate_list,$value['cate_pid']);

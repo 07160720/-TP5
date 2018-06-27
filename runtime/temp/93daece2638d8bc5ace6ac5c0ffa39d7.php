@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp64\www\jd\public/../application/admin\view\goods\add.html";i:1529483633;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:63:"D:\wamp64\www\jd\public/../application/admin\view\cate\add.html";i:1529215793;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -7,14 +7,44 @@
 		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
 		<meta name="description" content="JS代码网提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
 		<link href="/jd/public/static/admin/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="/jd/public/static/admin/assets/css/font-awesome.min.css" />
+
+
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+		<!-- ace styles -->
+
 		<link rel="stylesheet" href="/jd/public/static/admin/assets/css/ace.min.css" />
 		<link rel="stylesheet" href="/jd/public/static/admin/assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="/jd/public/static/admin/assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="/jd/public/static/admin/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
 		<script src="/jd/public/static/admin/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="/jd/public/static/admin/assets/js/html5shiv.js"></script>
+		<script src="/jd/public/static/admin/assets/js/respond.min.js"></script>
+		<![endif]-->
 	</head>
+
 	<body>
 		<!--navbar-->
 		<div class="navbar navbar-default" id="navbar">
@@ -284,6 +314,8 @@
     </div><!-- /.container -->
 </div>
 		<!--navbar-->
+
+
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -528,186 +560,65 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form" action="<?php echo url('goods/addhanddle'); ?>" method="post">
+								<form class="form-horizontal" role="form" action="<?php echo url('cate/addhanddle'); ?>" method="post">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_name">商品名称</label>
+										<label class="col-sm-3 control-label no-padding-right" for="cate_name">分类名称</label>
 										<div class="col-sm-9">
-											<input type="text" id="goods_name" name="goods_name" placeholder="请输入商品名称" class="col-xs-10 col-sm-5" style="margin: 10px;">
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="thumb"> 商品缩略图 </label>
-
-										<div class="col-xs-4">
-											<img src="/jd/public/static/admin/assets/images/upload/upload.png" id="img" name="img" width="130">
-											<div class="progress">
-												<div id="thumb_progress" class="progress-bar" style="width:0%;"></div>
-											</div>
-											<span id="thumb_upload" class="btn btn-primary fileinput-button">  
-												<span>上传</span>
-												<input id="goods_thumb" placeholder="" class="" type="file" name="goods_thumb">
-											</span>
-											<a id="thumb_cancle" href="javascript:void(0)" class="btn btn-warning" role="button"  style="display:none">删除</a>  
-										</div>
-									</div>                                    
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_price">商品价格</label>
-										<div class="col-sm-9">
-											<input type="text" id="goods_price" name="goods_price" placeholder="请输入商品价格" class="col-xs-10 col-sm-5" style="margin: 10px;">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_after_price">促销价格</label>
-										<div class="col-sm-9">
-											<input type="text" id="goods_after_price" name="goods_after_price" placeholder="不促销就不填写" class="col-xs-10 col-sm-5" style="margin: 10px;">
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_status">商品状态</label>
-										<input id="goods_status" name="goods_status" value="1" checked="checked" type="checkbox" class="ace ace-switch ace-switch-5" style="margin: 20px;">
-										<span class="lbl"></span>
-										
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_sales">商品销量</label>
-										<div class="col-sm-9">
-											<input type="text" id="goods_sales" name="goods_sales" placeholder="请输入商品销量" class="col-xs-10 col-sm-5" style="margin: 10px;">
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_inventory">商品库存</label>
-										<div class="col-sm-9">
-											<input type="text" id="goods_inventory" name="goods_inventory" placeholder="请输入商品库存" class="col-xs-10 col-sm-5" style="margin: 10px;">
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_img"> 商品细节图 </label>
-										<div class="col-xs-4">
-											<div class="progress">
-												<div id="img_progress" class="progress-bar" style="width:0%;"></div>
-											</div>
-											<span id="img_upload" class="btn btn-primary fileinput-button">  
-												<span>上传</span>
-												<input id="goods_img" placeholder="" class="" type="file" name="goods_img" multiple="">
-											</span> 
-											<div class="preview" style="margin-top:20px;"></div>
+											<input type="text" id="cate_name" name="cate_name" placeholder="请输入分类名称" class="col-xs-10 col-sm-5" style="margin: 10px;">
 										</div>
 									</div>
 
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="goods_pid"> 所属分类 </label>
-										<div class="col-xs-4" style="margin: 10px;">
-											<ul class="nav nav-list">
-												<?php if(is_array($cate_list1) || $cate_list1 instanceof \think\Collection || $cate_list1 instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list1;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>
-												<li class="active">
-													<a href="#" class="dropdown-toggle">
-														<!-- <i class="icon-desktop"></i> -->
-														<span class="menu-text"> <?php echo $vo1['cate_name']; ?> </span>
-														<b class="arrow icon-angle-down"></b>
-													</a>
-													
-													<ul class="submenu" style="display: none";>
-														<?php if(is_array($vo1['children']) || $vo1['children'] instanceof \think\Collection || $vo1['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo1['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?>
-														<li class="open">
-															<a href="#" class="dropdown-toggle">
-																<i class="icon-double-angle-right"></i>
-																<p style="margin: -10px; height: 30px;"><?php echo $vo2['cate_name']; ?></p>
-																
-																<b class="arrow icon-angle-down"></b>
-															</a>
-															<ul class="submenu" style="display: none;">
-																<div class="col-xs-4">
-																	<?php if(is_array($vo2['children']) || $vo2['children'] instanceof \think\Collection || $vo2['children'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo2['children'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?>	
-																	<li style="width: 200px;height: 30px;">&nbsp;&nbsp;&nbsp;
-																		<input name="goods_pid" value="<?php echo $vo3['cate_id']; ?>" type="radio"><?php echo $vo3['cate_name']; ?></li>
-																		<?php endforeach; endif; else: echo "" ;endif; ?>	
-																	</div>
-																</ul>
-																<?php endforeach; endif; else: echo "" ;endif; ?>
-															</li>
-														</ul>
-													</li>
-													<?php endforeach; endif; else: echo "" ;endif; ?>
-												</ul>
-											</div>
+										<label class="col-sm-3 control-label no-padding-right" for="cate_pid"> 所属分类 </label>
+
+										<div class="col-sm-9">
+											<select class="form-control" id="cate_pid" name="cate_pid" style="margin: 10px;">
+												<option value="0">
+													顶级分类
+												</option>
+												<?php if(is_array($cate_list) || $cate_list instanceof \think\Collection || $cate_list instanceof \think\Paginator): $i = 0; $__LIST__ = $cate_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+												<option value="<?php echo $vo['cate_id']; ?>">
+													<?php echo $vo['str']; ?><?php echo $vo['cate_name']; ?>
+												</option>
+												<?php endforeach; endif; else: echo "" ;endif; ?>
+											</select>
 										</div>
-										<div class="clearfix form-actions">
-											<div class="col-md-offset-3 col-md-9">
-												<input type="submit" name="" value="添加分类" class="btn btn-info">
-												&nbsp; &nbsp; &nbsp;
-												<input type="reset" name="" value="重置分类" class="btn">
-											</div>
+									</div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<input type="submit" name="" value="添加分类" class="btn btn-info">
+											&nbsp; &nbsp; &nbsp;
+											<input type="reset" name="" value="重置分类" class="btn">
 										</div>
-									</form>
-								</div><!-- /.col -->
-							</div><!-- /.row -->
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		<script src='/jd/public/static/admin/assets/js/jquery-2.0.3.min.js'>
-		</script>
-        <!-- 商品细节图 -->
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+	<i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
 		<script type="text/javascript">
-			$(function(){
-				$('#goods_img').fileupload({
-					url:'<?php echo url("admin/goods/imgupload"); ?>',
-					dataType: "json",   
-					multipart:true,
-					sequentialUploads: true,
-					done:function(e,data){
-						$(".preview").append("<div style='margin-top:10px;'><img src="+data.result+" width='100'>");
-						$(".preview").append("<a class='img_cancle btn btn-warning' role='button' style=''>删除</a></div>");
-					},
-					progressall:function(e,data){
-						var progress = parseInt(data.loaded / data.total * 100, 10);  
-						$("#img_progress").css("width", progress + "%");  
-						$("#img_progress").html("上传总进度："+progress+"%"); 
-					}
-				})
-			})
+			window.jQuery || document.write("<script src='/jd/public/static/admin/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
+
+
 		<script type="text/javascript">
-			$(function(){
-				$(".preview").on("click",".img_cancle",function(){
-					var index = $(".preview a").index(this);
-					var me = this;
-					$.ajax({
-						data:{'index':index},
-						type:"post",
-						url:"<?php echo url('admin/goods/imgcancle'); ?>",
-						success:function(data){
-							$(me).prev('div').css({display:"none"});
-							$(me).css({display:"none"});
-							$("#img_progress").css('width',0);
-							$("#img_progress").html('');
-						}
-					})
-				})
-			})
-		</script>
-        <!-- /商品细节图 -->
-		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='/jd/public/static/admin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='/jd/public/static/admin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		<script src="/jd/public/static/admin/assets/js/bootstrap.min.js"></script>
 		<script src="/jd/public/static/admin/assets/js/typeahead-bs2.min.js"></script>
 
-		<script src="/jd/public/static/admin/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/jquery.slimscroll.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/jquery.easy-pie-chart.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/jquery.sparkline.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/flot/jquery.flot.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/flot/jquery.flot.pie.min.js"></script>
-		<script src="/jd/public/static/admin/assets/js/flot/jquery.flot.resize.min.js"></script>
+		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
 
@@ -715,89 +626,5 @@
 		<script src="/jd/public/static/admin/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-
-	    <!-- jqeury-file-upload -->
-		<!-- <link href="/jd/public/static/admin/css/bootstrap.min.css" rel="stylesheet">   -->
-		<link rel="stylesheet" href="/jd/public/static/admin/jfu/css/jquery.fileupload.css">  
-		<link rel="stylesheet" href="/jd/public/static/admin/jfu/css/jquery.fileupload-ui.css"> 
-		<!-- <script src="/jd/public/static/admin/js/jquery-2.0.3.min.js"></script>  -->
-		<script src="/jd/public/static/admin/jfu/js/vendor/jquery.ui.widget.js"></script>  
-		<script src="/jd/public/static/admin/jfu/js/jquery.fileupload.js"></script>  
-		<script src="/jd/public/static/admin/jfu/js/jquery.iframe-transport.js"></script>  
-
-		<script type="text/javascript">
-			$(function() {  
-				$("#goods_thumb").fileupload({  
-					url: '<?php echo url("admin/goods/uploadthumb"); ?>',  
-					sequentialUploads: true  
-				}).bind('fileuploadprogress', function (e, data) {  
-					var progress = parseInt(data.loaded / data.total * 100, 10);  
-					$("#thumb_progress").css('width',progress + '%');  
-					$("#thumb_progress").html(progress + '%');  
-				}).bind('fileuploaddone', function (e, data) {console.log(data);
-					$("#img").attr("src",data.result);  
-					$("#thumb_upload").css({display:"none"}); 
-					$("#thumb_cancle").css({display:""}); 
-				});  
-			});
-		</script> 
-		<script type="text/javascript">
-			$(function(){
-				$('#thumb_cancle').click(function(){
-					$.ajax({
-						url:'<?php echo url("admin/goods/canclethumb"); ?>',
-						type:'post',
-						success:function(data){
-							$("#thumb_upload").css({display:""}); 
-							$("#thumb_cancle").css({display:"none"});
-							$("#thumb_progress").css('width',0);
-							$("#thumb_progress").html('');
-							$("#img").attr("src","/jd/public/static/admin/assets/images/upload/upload.png");  
-						}
-					});
-				});
-			});
-		</script>
-		<!-- 商品细节图 -->
-	<!-- 	<script type="text/javascript">
-			$(function(){
-				$('#goods_img').fileupload({
-					url:'<?php echo url("admin/goods/imgupload"); ?>',
-					dataType: "json",   
-					multipart:true,
-					sequentialUploads: true,
-					done:function(e,data){
-						$(".preview").append("<div style='margin-top:10px;'><img src="+data.result+" width='100'>");
-						$(".preview").append("<a class='img_cancle btn btn-warning' role='button' style=''>删除</a></div>");
-					},
-					progressall:function(e,data){
-						var progress = parseInt(data.loaded / data.total * 100, 10);  
-						$("#img_progress").css("width", progress + "%");  
-						$("#img_progress").html("上传总进度："+progress+"%"); 
-					}
-				})
-			})
-		</script>
-		<script type="text/javascript">
-			$(function(){
-				$(".preview").on("click",".img_cancle",function(){
-					var index = $(".preview a").index(this);
-					var me = this;
-					$.ajax({
-						data:{'index':index},
-						type:"post",
-						url:"<?php echo url('admin/goods/imgcancle'); ?>",
-						success:function(data){
-							$(me).prev('div').css({display:"none"});
-							$(me).css({display:"none"});
-						}
-					})
-				})
-			})
-		</script> -->
-		<!-- /商品细节图 -->
-		<script src="/jd/public/static/admin/assets/js/fuelux/fuelux.tree.min.js"></script>
-		<script type="text/javascript">
-		</script> 
 	</body>
 </html>

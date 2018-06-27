@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp64\www\jd\public/../application/admin\view\goods\upd.html";i:1529319657;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"D:\wamp64\www\jd\public/../application/admin\view\goods\upd.html";i:1529578825;s:58:"D:\wamp64\www\jd\application\admin\view\public\navbar.html";i:1527774212;s:60:"D:\wamp64\www\jd\application\admin\view\public\slidebar.html";i:1528945715;}*/ ?>
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -562,7 +562,14 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="goods_after_price">促销价格</label>
 										<div class="col-sm-9">
-											<input type="text" id="goods_after_price" name="goods_after_price" placeholder="请输入促销价格" class="col-xs-10 col-sm-5" style="margin: 10px;" value="<?php echo $goods_find['goods_after_price']; ?>">
+											<input type="text" id="goods_after_price" name="goods_after_price" 
+											 class="col-xs-10 col-sm-5" style="margin: 10px;"
+                                              <?php if($goods_find['goods_after_price']): ?>
+                                               value="<?php echo $goods_find['goods_after_price']; ?>"
+                                              <?php else: ?>
+											  placeholder="不促销不填写"
+											  <?php endif; ?>
+											>
 										</div>
 									</div>
 
@@ -589,6 +596,27 @@
 										<div class="col-sm-9">
 											<input type="text" id="goods_inventory" name="goods_inventory" placeholder="请输入商品库存" class="col-xs-10 col-sm-5" style="margin: 10px;" value="<?php echo $goods_find['goods_inventory']; ?>">
 										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="goods_img"> 商品细节图 </label>
+										<div class="col-xs-4">
+											<div class="progress">
+												<div id="img_progress" class="progress-bar" style="width:0%;"></div>
+											</div>
+											<span id="img_upload" class="btn btn-primary fileinput-button">  
+												<span>上传</span>
+												<input id="goods_img" placeholder="" class="" type="file" name="goods_img" multiple="">
+											</span> 
+											<div class="preview" style="margin-top:20px;">
+												<?php if(is_array($img_select) || $img_select instanceof \think\Collection || $img_select instanceof \think\Paginator): $i = 0; $__LIST__ = $img_select;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+												<div style='margin-top:10px;'>
+													<img src="<?php echo $vo['url']; ?>" width='100'>
+													<a class='img_cancle btn btn-warning' role='button' style=''>删除</a>
+											    </div>
+											    <?php endforeach; endif; else: echo "" ;endif; ?>
+										    </div>
+									    </div>
 									</div>
 
 									<div class="space-4"></div>
@@ -693,7 +721,8 @@
 		<script src="/jd/public/static/admin/jfu/js/vendor/jquery.ui.widget.js"></script>  
 		<script src="/jd/public/static/admin/jfu/js/jquery.fileupload.js"></script>  
 		<script src="/jd/public/static/admin/jfu/js/jquery.iframe-transport.js"></script>  
-
+        
+        <!-- 商品缩略图 -->
 		<script type="text/javascript">
 			$(function() {  
 				$("#goods_thumb").fileupload({  
@@ -713,9 +742,7 @@
 		<script type="text/javascript">
 			$(function(){
 				$('#thumb_cancle').click(function(){
-					//alert(111);
 					$.ajax({
-						
 						url:'<?php echo url("admin/goods/canclethumb"); ?>',
 						type:'post',
 						success:function(data){
@@ -729,8 +756,9 @@
 				});
 			});
 		</script>
+		<!-- /商品缩略图 -->
 		<!-- 商品细节图 -->
-	<!-- 	<script type="text/javascript">
+		<script type="text/javascript">
 			$(function(){
 				$('#goods_img').fileupload({
 					url:'<?php echo url("admin/goods/imgupload"); ?>',
@@ -760,12 +788,13 @@
 						url:"<?php echo url('admin/goods/imgcancle'); ?>",
 						success:function(data){
 							$(me).prev('div').css({display:"none"});
+							$(me).prev('img').css({display:"none"});
 							$(me).css({display:"none"});
 						}
 					})
 				})
 			})
-		</script> -->
+		</script>
 		<!-- /商品细节图 -->
 		<script src="/jd/public/static/admin/assets/js/fuelux/fuelux.tree.min.js"></script>
 		<script type="text/javascript">
